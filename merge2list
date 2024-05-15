@@ -1,0 +1,51 @@
+//LEETCODE MERGE TWO SORTED LIST
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+struct ListNode* mergeTwoLists(struct ListNode* list1, struct ListNode* list2) {
+    struct ListNode* cur;
+    struct ListNode* temp;
+    struct ListNode* n;
+    int t,i,j,count=0;
+    
+    if(list1==NULL && list2==NULL )
+    {
+        return NULL;
+    }
+    if(list1==NULL && list2!=NULL)
+    {
+        return list2;
+    }
+        cur=list1;
+        while(cur->next!=NULL)
+            cur=cur->next;
+        cur->next=list2;
+        temp=list1;
+        while(temp!=NULL)
+        {
+            count++;
+            temp=temp->next;
+        }
+        n=list1;
+        for(i=0;i<count-1;i++)
+        {
+            n=list1;
+            for(j=0;j<count-i-1;j++)
+            {
+                if(n->val > (n->next)->val)
+                {
+                    t=n->val;
+                    n->val=(n->next)->val;
+                    (n->next)->val=t;
+                }
+                n=n->next;
+            }
+        }
+        return list1;
+    
+}
